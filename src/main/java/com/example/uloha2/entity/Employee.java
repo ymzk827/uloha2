@@ -1,6 +1,9 @@
 package com.example.uloha2.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "employee")
@@ -29,7 +32,11 @@ public class Employee {
     private Integer salary;
 
     @Column(name = "full_time")
-    private Integer full_time;
+    private Integer fullTime; // Змінено на camelCase
+
+    @Column(name = "birth_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthDate;
 
     public Integer getId() {
         return id;
@@ -68,14 +75,13 @@ public class Employee {
     }
 
     public void setPhone(String phone) {
-        this.email = phone;
+        this.phone = phone; 
     }
 
-    public String getJob() {
+    public String getJobTitle() {
         return jobTitle;
     }
-
-    public void setJob(String jobTitle) {
+    public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
@@ -87,14 +93,17 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Integer getFulltime() {
-        return full_time;
+    public Integer getFullTime() {
+        return fullTime;
     }
 
-    public void setFulltime(Integer fulltime) {
-        this.full_time = fulltime;
+    public void setFullTime(Integer fullTime) {
+        this.fullTime = fullTime;
     }
-
-
-
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 }
