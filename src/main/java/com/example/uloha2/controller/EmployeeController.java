@@ -1,6 +1,7 @@
 package com.example.uloha2.controller;
 
 import com.example.uloha2.dao.EmployeeRepository;
+import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -38,13 +39,13 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee createEmployee(@RequestBody Employee employee){
+    public Employee createEmployee(@Valid @RequestBody Employee employee){
         employee.setId(null);
         return repository.save(employee);
     }
 
     @PutMapping("/employees/{id}")
-    public Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee){
+    public Employee updateEmployee(@PathVariable Integer id, @Valid @RequestBody Employee employee){
         Employee existingEmployee = repository.findById(id).orElse(null);
 
         if(existingEmployee == null){
